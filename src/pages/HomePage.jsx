@@ -6,7 +6,6 @@ import Footer from "../components/Footer";
 const HomePage = () => {
   return (
     <>
-      <NavBar />
       <div
         className="w-full min-h-[calc(100vh-210px)] 
              flex flex-col justify-center items-start 
@@ -34,7 +33,6 @@ const HomePage = () => {
           Find your van
         </Link>
       </div>
-      <Footer />
     </>
   );
 };

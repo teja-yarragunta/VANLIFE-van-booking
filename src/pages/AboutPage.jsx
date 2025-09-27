@@ -7,7 +7,6 @@ import Footer from "../components/Footer";
 const AboutPage = () => {
   return (
     <>
-      <NavBar />
       <div className="w-full bg-[#fdf1e4] pb-6">
         {/* Hero image */}
         <img
@@ -47,7 +46,6 @@ const AboutPage = () => {
           </Link>
         </div>
       </div>
-      <Footer />
     </>
   );
 };
