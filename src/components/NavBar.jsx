@@ -1,9 +1,10 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 
 const NavBar = () => {
   const navLinkStyles =
-    "no-underline text-[#4D4D4D] font-semibold px-5 py-[5px] hover:text-[#161616] hover:underline hover:text-2xl";
+    "no-underline text-[#4D4D4D] font-semibold px-5 py-[5px] hover:text-[#161616] hover:underline";
+  const activeNavLinkStyles = "font-bold underline text-[#161616]";
 
   return (
     <header className="bg-[#fdf1e4] h-[130px] font-['Inter'] flex items-center py-[10px] px-6">
@@ -16,15 +17,30 @@ const NavBar = () => {
       </Link>
       {/* nav links */}
       <nav>
-        <Link className={navLinkStyles} to="/admin">
+        <NavLink
+          className={({ isActive }) =>
+            isActive ? `${navLinkStyles} ${activeNavLinkStyles}` : navLinkStyles
+          }
+          to="/admin"
+        >
           Admin
-        </Link>
-        <Link className={navLinkStyles} to="/about">
+        </NavLink>
+        <NavLink
+          className={({ isActive }) =>
+            isActive ? `${navLinkStyles} ${activeNavLinkStyles}` : navLinkStyles
+          }
+          to="/about"
+        >
           About
-        </Link>
-        <Link className={navLinkStyles} to="/vans">
+        </NavLink>
+        <NavLink
+          className={({ isActive }) =>
+            isActive ? `${navLinkStyles} ${activeNavLinkStyles}` : navLinkStyles
+          }
+          to="/vans"
+        >
           Vans
-        </Link>
+        </NavLink>
       </nav>
     </header>
   );

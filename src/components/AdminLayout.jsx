@@ -1,24 +1,30 @@
 import React from "react";
-import { Link, Outlet } from "react-router-dom";
+import { NavLink, Outlet } from "react-router-dom";
 
 const AdminLayout = () => {
   const navLinkStyles =
     "no-underline text-[#4D4D4D] px-5 hover:text-[#161616] hover:underline";
+  const activeNavLinkStyles = "font-bold underline text-[#161616]";
+
+  const getLinkClass = ({ isActive }) =>
+    isActive ? `${navLinkStyles} ${activeNavLinkStyles}` : navLinkStyles;
 
   return (
     <>
       {/* nav links */}
       <nav className="bg-[#fdf1e4] h-[90px] font-['Inter'] flex items-center px-4">
-        <Link className={navLinkStyles} to="/admin">
+        <NavLink to="/admin" className={getLinkClass} end>
           Dashboard
-        </Link>
-        <Link className={navLinkStyles} to="/admin/income">
+        </NavLink>
+        <NavLink to="/admin/income" className={getLinkClass}>
           Income
-        </Link>
-        <Link className={navLinkStyles} to="/admin/reviews">
+        </NavLink>
+        <NavLink to="/admin/reviews" className={getLinkClass}>
           Reviews
-        </Link>
+        </NavLink>
       </nav>
+
+      {/* nested routes render here */}
       <Outlet />
     </>
   );
