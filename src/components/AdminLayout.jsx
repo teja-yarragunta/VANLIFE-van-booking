@@ -19,6 +19,9 @@ const AdminLayout = () => {
         <NavLink to="/admin/income" className={getLinkClass}>
           Income
         </NavLink>
+        <NavLink to="/admin/vans" className={getLinkClass}>
+          Vans
+        </NavLink>
         <NavLink to="/admin/reviews" className={getLinkClass}>
           Reviews
         </NavLink>

@@ -12,6 +12,8 @@ import Dashboard from "./pages/Admin/Dashboard";
 import Income from "./pages/Admin/Income";
 import Reviews from "./pages/Admin/Reviews";
 import AdminLayout from "./components/AdminLayout";
+import AdminVansPage from "./pages/Admin/AdminVansPage";
+import AdminVanDetails from "./pages/Admin/AdminVanDetails";
 
 const App = () => {
   return (
@@ -27,6 +29,8 @@ const App = () => {
           <Route path="/admin" element={<AdminLayout />}>
             <Route index element={<Dashboard />} />
             <Route path="income" element={<Income />} />
+            <Route path="vans" element={<AdminVansPage />} />
+            <Route path="vans/:id" element={<AdminVanDetails />} />
             <Route path="reviews" element={<Reviews />} />
           </Route>
         </Route>
