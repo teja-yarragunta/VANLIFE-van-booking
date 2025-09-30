@@ -18,7 +18,7 @@ const AboutPage = () => {
         {/* Page content */}
         <div className="px-6 sm:px-10 lg:px-20 text-[#161616] mb-14 ">
           <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold leading-snug mt-8">
-            Don’t squeeze in a sedan when you could relax in a van.
+            Don't squeeze in a sedan when you could relax in a van.
           </h1>
           <p className="leading-relaxed mt-4 text-base sm:text-lg max-w-2xl">
             Our mission is to enliven your road trip with the perfect travel van
