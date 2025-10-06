@@ -20,13 +20,13 @@ const App = () => {
     <>
       <Routes>
         <Route path="/" element={<Layout />}>
-          {/* Layout don't need path, if no path it's gonna render Layout for all the children paths */}
+          {/* Layout don't need path, if there is no path, it's gonna render Layout for all the children paths */}
           <Route index element={<HomePage />} />
           <Route path="about" element={<AboutPage />} />
           <Route path="vans" element={<VansPage />} />
           <Route path="vans/:id" element={<VanDetails />} />
           {/* Admin */}
-          <Route path="/admin" element={<AdminLayout />}>
+          <Route path="admin" element={<AdminLayout />}>
             <Route index element={<Dashboard />} />
             <Route path="income" element={<Income />} />
             <Route path="vans" element={<AdminVansPage />} />
