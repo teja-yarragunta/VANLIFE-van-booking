@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 
 const AdminVanDetails = () => {
   const getTypeClasses = (type) => {
@@ -29,6 +29,17 @@ const AdminVanDetails = () => {
 
   return (
     <section>
+      <Link
+        to=".."
+        relative="path"
+        className="block w-full bg-[#fdf1e4] py-4 px-6 text-[#161616] font-semibold hover:underline transition-colors duration-200"
+      >
+        &larr;{" "}
+        <span className="text-base font-medium tracking-wide">
+          Back to all vans
+        </span>
+      </Link>
+
       <div className="bg-white p-6 my-[30px] mx-[26px]">
         {currentVan ? (
           <div className="flex items-center ml-12 mr-12">

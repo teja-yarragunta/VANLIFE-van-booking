@@ -13,16 +13,18 @@ const AdminLayout = () => {
     <>
       {/* nav links */}
       <nav className="bg-[#fdf1e4] h-[90px] font-['Inter'] flex items-center px-4">
-        <NavLink to="/admin" className={getLinkClass} end>
+        {/* <NavLink to="/admin" className={getLinkClass} end> */}
+        {/* using relative path */}
+        <NavLink to="." className={getLinkClass} end>
           Dashboard
         </NavLink>
-        <NavLink to="/admin/income" className={getLinkClass}>
+        <NavLink to="income" className={getLinkClass}>
           Income
         </NavLink>
-        <NavLink to="/admin/vans" className={getLinkClass}>
+        <NavLink to="vans" className={getLinkClass}>
           Vans
         </NavLink>
-        <NavLink to="/admin/reviews" className={getLinkClass}>
+        <NavLink to="reviews" className={getLinkClass}>
           Reviews
         </NavLink>
       </nav>
