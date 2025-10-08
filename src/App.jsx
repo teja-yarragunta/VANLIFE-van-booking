@@ -14,6 +14,9 @@ import Reviews from "./pages/Admin/Reviews";
 import AdminLayout from "./components/AdminLayout";
 import AdminVansPage from "./pages/Admin/AdminVansPage";
 import AdminVanDetails from "./pages/Admin/AdminVanDetails";
+import AdminVanInfo from "./pages/Admin/AdminVanInfo";
+import AdminVanPricing from "./pages/Admin/AdminVanPricing";
+import AdminVanPhotos from "./pages/Admin/AdminVanPhotos";
 
 const App = () => {
   return (
@@ -30,8 +33,12 @@ const App = () => {
             <Route index element={<Dashboard />} />
             <Route path="income" element={<Income />} />
             <Route path="vans" element={<AdminVansPage />} />
-            <Route path="vans/:id" element={<AdminVanDetails />} />
             <Route path="reviews" element={<Reviews />} />
+            <Route path="vans/:id" element={<AdminVanDetails />}>
+              <Route index element={<AdminVanInfo />} />
+              <Route path="pricing" element={<AdminVanPricing />} />
+              <Route path="photos" element={<AdminVanPhotos />} />
+            </Route>
           </Route>
         </Route>
         {/* (:id) - router parameters/route params says that there'll be something there, that can be anything like 1,2,something */}

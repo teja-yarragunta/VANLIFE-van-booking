@@ -5,9 +5,15 @@ import { Outlet } from "react-router-dom";
 
 const Layout = () => {
   return (
-    <div>
+    // make the whole app a column with min height of the screen so footer can stick to bottom
+    <div className="min-h-screen flex flex-col">
       <NavBar />
-      <Outlet />
+
+      {/* main area grows to fill available space */}
+      <main className="flex-1">
+        <Outlet />
+      </main>
+
       <Footer />
     </div>
   );

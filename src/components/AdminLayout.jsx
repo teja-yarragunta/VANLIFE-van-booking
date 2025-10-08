@@ -28,7 +28,7 @@ const AdminLayout = () => {
           Reviews
         </NavLink>
       </nav>
-
+      
       {/* nested routes render here */}
       <Outlet />
     </>

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link, NavLink, Outlet, useParams } from "react-router-dom";
 
 const AdminVanDetails = () => {
   const getTypeClasses = (type) => {
@@ -16,6 +16,13 @@ const AdminVanDetails = () => {
         return base;
     }
   };
+
+  const navLinkStyles =
+    "no-underline text-[#4D4D4D] px-5 hover:text-[#161616] hover:underline";
+  const activeNavLinkStyles = "font-bold underline text-[#161616]";
+
+  const getLinkClass = ({ isActive }) =>
+    isActive ? `${navLinkStyles} ${activeNavLinkStyles}` : navLinkStyles;
 
   const { id } = useParams();
   const [currentVan, setCurrentVan] = useState(null);
@@ -62,6 +69,21 @@ const AdminVanDetails = () => {
           <h2>Loading...</h2>
         )}
       </div>
+      {/* nav for info, pricing, photos */}
+      <nav className="flex font-['Inter'] my-[30px] mx-[75px]">
+        <NavLink to="." className={getLinkClass} end>
+          Details
+        </NavLink>
+        <NavLink to="pricing" className={getLinkClass}>
+          Pricing
+        </NavLink>
+        <NavLink to="photos" className={getLinkClass}>
+          Photos
+        </NavLink>
+      </nav>
+
+      {/* for info, photo and pricing */}
+      <Outlet context={{ currentVan }} />
     </section>
   );
 };
