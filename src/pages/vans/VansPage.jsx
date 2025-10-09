@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useSearchParams } from "react-router-dom";
 
 const VansPage = () => {
   const [vans, setVans] = useState([]);
@@ -9,6 +9,10 @@ const VansPage = () => {
       .then((res) => res.json())
       .then((data) => setVans(data.vans));
   }, []);
+
+  const [searchParams, setSearchParams] = useSearchParams();
+  const typeFilter = searchParams.get("type");
+  console.log(typeFilter);
 
   const getTypeClasses = (type) => {
     const base =
