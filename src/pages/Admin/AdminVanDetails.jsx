@@ -62,7 +62,7 @@ const AdminVanDetails = () => {
               <h3 className="mt-6 mb-1 text-[26px] font-bold">
                 {currentVan.name}
               </h3>
-              <h4 className="text-[20px] m-0">${currentVan.price}/day</h4>
+              <h4 className="text-[20px] m-0">Rs.{currentVan.price}/day</h4>
             </div>
           </div>
         ) : (

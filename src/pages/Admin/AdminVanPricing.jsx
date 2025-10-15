@@ -9,7 +9,7 @@ const AdminVanPricing = () => {
 
   return (
     <h3 className="text-[32px] font-semibold text-[#161616] mx-25 my-10">
-      ${currentVan.price}
+      Rs.{currentVan.price}
       <span className="text-[18px] text-[#4D4D4D] font-medium">/day</span>
     </h3>
   );
