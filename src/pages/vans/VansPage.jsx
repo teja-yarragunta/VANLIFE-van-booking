@@ -10,10 +10,6 @@ const VansPage = () => {
       .then((data) => setVans(data.vans));
   }, []);
 
-  const [searchParams, setSearchParams] = useSearchParams();
-  const typeFilter = searchParams.get("type");
-  console.log(typeFilter);
-
   const getTypeClasses = (type) => {
     const base =
       "inline-block px-5 py-1.5 text-sm font-medium rounded-md capitalize transition-colors";
@@ -29,7 +25,14 @@ const VansPage = () => {
     }
   };
 
-  const vanElements = vans.map((van) => (
+  const [searchParams, setSearchParams] = useSearchParams();
+  const typeFilter = searchParams.get("type");
+
+  const filteredVans = typeFilter
+    ? vans.filter((van) => van.type === typeFilter)
+    : vans;
+
+  const vanElements = filteredVans.map((van) => (
     <div
       key={van.id}
       className="flex flex-col bg-white rounded-lg shadow-sm overflow-hidden"
@@ -66,6 +69,45 @@ const VansPage = () => {
         <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-[#161616] mb-8">
           Explore our van options 🥳
         </h1>
+        {/* type filters */}
+        <div className="flex flex-wrap gap-6 mb-10">
+          {/* <Link to="?type=simple">Simple</Link>
+          <Link to="?type=rugged">Rugged</Link>
+          <Link to="?type=luxury">Luxury</Link>
+          <Link to=".">Clear Filters</Link> */}
+          {/* 2nd way */}
+          {/* <button onClick={() => setSearchParams("?type=simple")}>
+            Simple
+          </button> */}
+          {/* no need to '?' */}
+          <button
+            onClick={() => setSearchParams({ type: "simple" })}
+            className="h-[34px] px-[26px] py-[6px] font-medium rounded-[5px] border-none bg-[#FFEAD0] text-[#4D4D4D] transition-all duration-200 hover:bg-[#E17654] hover:text-[#FFEAD0] focus:outline-none"
+          >
+            Simple
+          </button>
+
+          <button
+            onClick={() => setSearchParams({ type: "rugged" })}
+            className="h-[34px] px-[26px] py-[6px] font-medium rounded-[5px] border-none bg-[#FFEAD0] text-[#4D4D4D] transition-all duration-200 hover:bg-[#115E59] hover:text-[#FFEAD0] focus:outline-none"
+          >
+            Rugged
+          </button>
+
+          <button
+            onClick={() => setSearchParams({ type: "luxury" })}
+            className="h-[34px] px-[26px] py-[6px] font-medium rounded-[5px] border-none bg-[#FFEAD0] text-[#4D4D4D] transition-all duration-200 hover:bg-[#161616] hover:text-[#FFEAD0] focus:outline-none"
+          >
+            Luxury
+          </button>
+
+          <button
+            onClick={() => setSearchParams({})}
+            className="h-[34px] px-[26px] py-[6px] font-medium rounded-[5px] border-none text-[#4D4D4D] bg-transparent underline ml-[-20px] focus:outline-none"
+          >
+            Clear Filters
+          </button>
+        </div>
 
         {/* Grid layout: 1 col mobile, 2 cols tablet, 3 cols desktop */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
