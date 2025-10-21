@@ -40,7 +40,9 @@ const VansPage = () => {
       <Link
         // to={`/vans/${van.id}`}
         // to={`${van.id}`}
+        // Link State
         to={van.id}
+        state={{ search: `?${searchParams.toString()}`, type: typeFilter }} // we are just passing the state here
         aria-label={`View details for ${van.name}, 
                              priced at $${van.price} per day`}
       >
@@ -65,12 +67,15 @@ const VansPage = () => {
     </div>
   ));
 
-  const handleFilterChange = (type) => {
-    if (type === typeFilter) {
-      setSearchParams({}); // clear filter if clicked again
-    } else {
-      setSearchParams({ type });
-    }
+  const handleFilterChange = (key, value) => {
+    setSearchParams((prevParams) => {
+      if (value === null) {
+        prevParams.delete(key);
+      } else {
+        prevParams.set(key, value);
+      }
+      return prevParams;
+    });
   };
 
   return (
@@ -91,7 +96,7 @@ const VansPage = () => {
           </button> */}
           {/* no need to '?' */}
           <button
-            onClick={() => handleFilterChange("simple")}
+            onClick={() => handleFilterChange("type", "simple")}
             className={`h-[40px] px-[28px] py-[8px] text-lg font-medium rounded-md border-none transition-all duration-200 focus:outline-none cursor-pointer
           ${
             typeFilter === "simple"
@@ -103,7 +108,7 @@ const VansPage = () => {
           </button>
 
           <button
-            onClick={() => handleFilterChange("rugged")}
+            onClick={() => handleFilterChange("type", "rugged")}
             className={`h-[40px] px-[28px] py-[8px] text-lg font-medium rounded-md border-none transition-all duration-200 focus:outline-none cursor-pointer
           ${
             typeFilter === "rugged"
@@ -115,7 +120,7 @@ const VansPage = () => {
           </button>
 
           <button
-            onClick={() => handleFilterChange("luxury")}
+            onClick={() => handleFilterChange("type", "luxury")}
             className={`h-[40px] px-[28px] py-[8px] text-lg font-medium rounded-md border-none transition-all duration-200 focus:outline-none cursor-pointer
           ${
             typeFilter === "luxury"
@@ -128,7 +133,8 @@ const VansPage = () => {
 
           {typeFilter && (
             <button
-              onClick={() => setSearchParams({})}
+              // onClick={() => setSearchParams({})}
+              onClick={() => handleFilterChange("type", null)}
               className="ml-2 h-[40px] px-[28px] py-[8px] text-lg font-medium rounded-md border-none text-[#4D4D4D] bg-transparent underline focus:outline-none hover:text-black"
             >
               Clear Filters

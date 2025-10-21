@@ -37,8 +37,9 @@ const AdminVanDetails = () => {
   return (
     <section>
       <Link
-        to=".."
+        to=".." // one level up
         relative="path"
+        // one level up to the path, not to the routes hierarchy
         className="block w-full bg-[#fdf1e4] py-4 px-6 text-[#161616] font-semibold hover:underline transition-colors duration-200"
       >
         &larr;{" "}
