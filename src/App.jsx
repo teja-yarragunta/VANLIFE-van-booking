@@ -17,6 +17,7 @@ import AdminVanDetails from "./pages/Admin/AdminVanDetails";
 import AdminVanInfo from "./pages/Admin/AdminVanInfo";
 import AdminVanPricing from "./pages/Admin/AdminVanPricing";
 import AdminVanPhotos from "./pages/Admin/AdminVanPhotos";
+import PageNotFound from "./pages/PageNotFound";
 
 const App = () => {
   return (
@@ -40,10 +41,12 @@ const App = () => {
               <Route path="photos" element={<AdminVanPhotos />} />
             </Route>
           </Route>
+          <Route path="*" element={<PageNotFound />} />
         </Route>
         {/* (:id) - router parameters/route params says that there'll be something there, that can be anything like 1,2,something */}
         {/* http://localhost:5173/vans/2 (or anything like) http://localhost:5173/vans/something%20else */}
         {/* route component can only have another routes as children */}
+        {/* page not found */}
       </Routes>
     </>
   );

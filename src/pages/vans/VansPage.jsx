@@ -1,13 +1,26 @@
 import React, { useEffect, useState } from "react";
 import { Link, useSearchParams } from "react-router-dom";
+import { getVans } from "../../utils/api";
 
 const VansPage = () => {
   const [vans, setVans] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = React.useState(null);
 
   useEffect(() => {
-    fetch("/api/vans")
-      .then((res) => res.json())
-      .then((data) => setVans(data.vans));
+    async function loadVans() {
+      setLoading(true);
+      try {
+        const data = await getVans();
+        setVans(data);
+      } catch (err) {
+        setError(err);
+      } finally {
+        setLoading(false);
+      }
+    }
+
+    loadVans();
   }, []);
 
   const getTypeClasses = (type) => {
@@ -77,6 +90,28 @@ const VansPage = () => {
       return prevParams;
     });
   };
+
+  if (loading) {
+    return (
+      <h1
+        className="text-2xl sm:text-3xl lg:text-4xl font-bold text-[#161616] mb-8 p-20"
+        aria-live="polite"
+      >
+        Loading...
+      </h1>
+    );
+  }
+
+  if (error) {
+    return (
+      <h1
+        className="text-2xl sm:text-3xl lg:text-4xl font-bold text-[#161616] mb-8 p-20"
+        aria-live="assertive"
+      >
+        There was an error: {error.message}
+      </h1>
+    );
+  }
 
   return (
     <>
