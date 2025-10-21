@@ -38,7 +38,9 @@ const VansPage = () => {
       className="flex flex-col bg-white rounded-lg shadow-sm overflow-hidden"
     >
       <Link
-        to={`/vans/${van.id}`}
+        // to={`/vans/${van.id}`}
+        // to={`${van.id}`}
+        to={van.id}
         aria-label={`View details for ${van.name}, 
                              priced at $${van.price} per day`}
       >
@@ -63,6 +65,14 @@ const VansPage = () => {
     </div>
   ));
 
+  const handleFilterChange = (type) => {
+    if (type === typeFilter) {
+      setSearchParams({}); // clear filter if clicked again
+    } else {
+      setSearchParams({ type });
+    }
+  };
+
   return (
     <>
       <div className="w-full px-6 sm:px-10 lg:px-20 py-10 bg-[#fdf1e4] min-h-screen">
@@ -81,32 +91,49 @@ const VansPage = () => {
           </button> */}
           {/* no need to '?' */}
           <button
-            onClick={() => setSearchParams({ type: "simple" })}
-            className="h-[34px] px-[26px] py-[6px] font-medium rounded-[5px] border-none bg-[#FFEAD0] text-[#4D4D4D] transition-all duration-200 hover:bg-[#E17654] hover:text-[#FFEAD0] focus:outline-none"
+            onClick={() => handleFilterChange("simple")}
+            className={`h-[40px] px-[28px] py-[8px] text-lg font-medium rounded-md border-none transition-all duration-200 focus:outline-none cursor-pointer
+          ${
+            typeFilter === "simple"
+              ? "bg-[#E17654] text-white"
+              : "bg-[#FFEAD0] text-[#4D4D4D] hover:bg-[#E17654] hover:text-[#FFEAD0]"
+          }`}
           >
             Simple
           </button>
 
           <button
-            onClick={() => setSearchParams({ type: "rugged" })}
-            className="h-[34px] px-[26px] py-[6px] font-medium rounded-[5px] border-none bg-[#FFEAD0] text-[#4D4D4D] transition-all duration-200 hover:bg-[#115E59] hover:text-[#FFEAD0] focus:outline-none"
+            onClick={() => handleFilterChange("rugged")}
+            className={`h-[40px] px-[28px] py-[8px] text-lg font-medium rounded-md border-none transition-all duration-200 focus:outline-none cursor-pointer
+          ${
+            typeFilter === "rugged"
+              ? "bg-[#115E59] text-white"
+              : "bg-[#FFEAD0] text-[#4D4D4D] hover:bg-[#115E59] hover:text-[#FFEAD0]"
+          }`}
           >
             Rugged
           </button>
 
           <button
-            onClick={() => setSearchParams({ type: "luxury" })}
-            className="h-[34px] px-[26px] py-[6px] font-medium rounded-[5px] border-none bg-[#FFEAD0] text-[#4D4D4D] transition-all duration-200 hover:bg-[#161616] hover:text-[#FFEAD0] focus:outline-none"
+            onClick={() => handleFilterChange("luxury")}
+            className={`h-[40px] px-[28px] py-[8px] text-lg font-medium rounded-md border-none transition-all duration-200 focus:outline-none cursor-pointer
+          ${
+            typeFilter === "luxury"
+              ? "bg-[#161616] text-white"
+              : "bg-[#FFEAD0] text-[#4D4D4D] hover:bg-[#161616] hover:text-[#FFEAD0]"
+          }`}
           >
             Luxury
           </button>
 
-          <button
-            onClick={() => setSearchParams({})}
-            className="h-[34px] px-[26px] py-[6px] font-medium rounded-[5px] border-none text-[#4D4D4D] bg-transparent underline ml-[-20px] focus:outline-none"
-          >
-            Clear Filters
-          </button>
+          {typeFilter && (
+            <button
+              onClick={() => setSearchParams({})}
+              className="ml-2 h-[40px] px-[28px] py-[8px] text-lg font-medium rounded-md border-none text-[#4D4D4D] bg-transparent underline focus:outline-none hover:text-black"
+            >
+              Clear Filters
+            </button>
+          )}
         </div>
 
         {/* Grid layout: 1 col mobile, 2 cols tablet, 3 cols desktop */}
