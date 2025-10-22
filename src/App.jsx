@@ -41,12 +41,12 @@ const App = () => {
               <Route path="photos" element={<AdminVanPhotos />} />
             </Route>
           </Route>
+          {/* page not found */}
           <Route path="*" element={<PageNotFound />} />
         </Route>
         {/* (:id) - router parameters/route params says that there'll be something there, that can be anything like 1,2,something */}
         {/* http://localhost:5173/vans/2 (or anything like) http://localhost:5173/vans/something%20else */}
         {/* route component can only have another routes as children */}
-        {/* page not found */}
       </Routes>
     </>
   );
