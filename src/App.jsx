@@ -6,7 +6,7 @@ import AboutPage from "./pages/AboutPage";
 import VansPage from "./pages/vans/VansPage";
 import VanDetails from "./pages/vans/VanDetails";
 
-import "./server"; // mock backend server
+import "./server"; // mock backend server (not actual backend)
 
 import Dashboard from "./pages/Admin/Dashboard";
 import Income from "./pages/Admin/Income";
