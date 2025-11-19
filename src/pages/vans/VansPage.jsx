@@ -1,27 +1,34 @@
 import React, { useEffect, useState } from "react";
-import { Link, useSearchParams } from "react-router-dom";
+import { Link, useSearchParams, useLoaderData } from "react-router-dom";
 import { getVans } from "../../utils/api";
 
+export const loader = () => {
+  return getVans();
+};
+
 const VansPage = () => {
-  const [vans, setVans] = useState([]);
-  const [loading, setLoading] = useState(false);
+  // const [vans, setVans] = useState([]);
+  // const [loading, setLoading] = useState(false);
   const [error, setError] = React.useState(null);
 
-  useEffect(() => {
-    async function loadVans() {
-      setLoading(true);
-      try {
-        const data = await getVans();
-        setVans(data);
-      } catch (err) {
-        setError(err);
-      } finally {
-        setLoading(false);
-      }
-    }
+  const vans = useLoaderData();
+  // console.log(vans);
 
-    loadVans();
-  }, []);
+  // useEffect(() => {
+  //   async function loadVans() {
+  //     setLoading(true);
+  //     try {
+  //       const data = await getVans();
+  //       setVans(data);
+  //     } catch (err) {
+  //       setError(err);
+  //     } finally {
+  //       setLoading(false);
+  //     }
+  //   }
+
+  //   loadVans();
+  // }, []);
 
   const getTypeClasses = (type) => {
     const base =
@@ -91,16 +98,16 @@ const VansPage = () => {
     });
   };
 
-  if (loading) {
-    return (
-      <h1
-        className="text-2xl sm:text-3xl lg:text-4xl font-bold text-[#161616] mb-8 p-20"
-        aria-live="polite"
-      >
-        Loading...
-      </h1>
-    );
-  }
+  // if (loading) {
+  //   return (
+  //     <h1
+  //       className="text-2xl sm:text-3xl lg:text-4xl font-bold text-[#161616] mb-8 p-20"
+  //       aria-live="polite"
+  //     >
+  //       Loading...
+  //     </h1>
+  //   );
+  // }
 
   if (error) {
     return (

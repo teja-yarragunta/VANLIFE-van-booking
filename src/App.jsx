@@ -1,12 +1,18 @@
 import React from "react";
-import { Route, Routes, Link } from "react-router-dom";
+import {
+  RouterProvider,
+  createBrowserRouter,
+  createRoutesFromElements,
+  Route,
+  Link,
+} from "react-router-dom";
 import Layout from "./components/Layout";
 import HomePage from "./pages/HomePage";
 import AboutPage from "./pages/AboutPage";
-import VansPage from "./pages/vans/VansPage";
+import VansPage, { loader as vansLoader } from "./pages/vans/VansPage";
 import VanDetails from "./pages/vans/VanDetails";
 
-import "./server"; // mock backend server (not actual backend)
+import "./utils/server"; // mock backend server (not actual backend)
 
 import Dashboard from "./pages/Admin/Dashboard";
 import Income from "./pages/Admin/Income";
@@ -18,38 +24,44 @@ import AdminVanInfo from "./pages/Admin/AdminVanInfo";
 import AdminVanPricing from "./pages/Admin/AdminVanPricing";
 import AdminVanPhotos from "./pages/Admin/AdminVanPhotos";
 import PageNotFound from "./pages/PageNotFound";
+import Error from "./components/Error";
+
+const router = createBrowserRouter(
+  createRoutesFromElements(
+    <Route path="/" element={<Layout />}>
+      {/* Layout don't need path, if there is no path, it's gonna render Layout for all the children paths */}
+      <Route index element={<HomePage />} />
+      <Route path="about" element={<AboutPage />} />
+      <Route
+        path="vans"
+        element={<VansPage />}
+        loader={vansLoader}
+        errorElement={<Error />}
+      />
+      <Route path="vans/:id" element={<VanDetails />} />
+      {/* Admin */}
+      <Route path="admin" element={<AdminLayout />}>
+        <Route index element={<Dashboard />} />
+        <Route path="income" element={<Income />} />
+        <Route path="vans" element={<AdminVansPage />} />
+        <Route path="reviews" element={<Reviews />} />
+        <Route path="vans/:id" element={<AdminVanDetails />}>
+          <Route index element={<AdminVanInfo />} />
+          <Route path="pricing" element={<AdminVanPricing />} />
+          <Route path="photos" element={<AdminVanPhotos />} />
+        </Route>
+      </Route>
+      {/* page not found */}
+      <Route path="*" element={<PageNotFound />} />
+    </Route>
+    //  {/* (:id) - router parameters/route params says that there'll be something there, that can be anything like 1,2,something */}
+    //     {/* http://localhost:5173/vans/2 (or anything like) http://localhost:5173/vans/something%20else */}
+    //     {/* route component can only have another routes as children */}
+  )
+);
 
 const App = () => {
-  return (
-    <>
-      <Routes>
-        <Route path="/" element={<Layout />}>
-          {/* Layout don't need path, if there is no path, it's gonna render Layout for all the children paths */}
-          <Route index element={<HomePage />} />
-          <Route path="about" element={<AboutPage />} />
-          <Route path="vans" element={<VansPage />} />
-          <Route path="vans/:id" element={<VanDetails />} />
-          {/* Admin */}
-          <Route path="admin" element={<AdminLayout />}>
-            <Route index element={<Dashboard />} />
-            <Route path="income" element={<Income />} />
-            <Route path="vans" element={<AdminVansPage />} />
-            <Route path="reviews" element={<Reviews />} />
-            <Route path="vans/:id" element={<AdminVanDetails />}>
-              <Route index element={<AdminVanInfo />} />
-              <Route path="pricing" element={<AdminVanPricing />} />
-              <Route path="photos" element={<AdminVanPhotos />} />
-            </Route>
-          </Route>
-          {/* page not found */}
-          <Route path="*" element={<PageNotFound />} />
-        </Route>
-        {/* (:id) - router parameters/route params says that there'll be something there, that can be anything like 1,2,something */}
-        {/* http://localhost:5173/vans/2 (or anything like) http://localhost:5173/vans/something%20else */}
-        {/* route component can only have another routes as children */}
-      </Routes>
-    </>
-  );
+  return <RouterProvider router={router} />;
 };
 
 export default App;
