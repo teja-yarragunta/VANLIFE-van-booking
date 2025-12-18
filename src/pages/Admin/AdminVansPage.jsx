@@ -1,14 +1,23 @@
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLoaderData } from "react-router-dom";
+import { getAdminVans } from "../../utils/api";
+import { requireAuth } from "../../utils/authCheck";
+
+export const loader = async () => {
+  await requireAuth();
+  return getAdminVans();
+};
 
 const AdminVansPage = () => {
-  const [vans, setVans] = useState([]);
+  // const [vans, setVans] = useState([]);
 
-  useEffect(() => {
-    fetch("/api/admin/vans")
-      .then((res) => res.json())
-      .then((data) => setVans(data.vans));
-  }, []);
+  // useEffect(() => {
+  //   fetch("/api/admin/vans")
+  //     .then((res) => res.json())
+  //     .then((data) => setVans(data.vans));
+  // }, []);
+
+  const vans = useLoaderData();
 
   const vanElements = vans.map((van) => (
     <div

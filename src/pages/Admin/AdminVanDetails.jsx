@@ -1,5 +1,18 @@
 import React, { useEffect, useState } from "react";
-import { Link, NavLink, Outlet, useParams } from "react-router-dom";
+import {
+  Link,
+  NavLink,
+  Outlet,
+  useLoaderData,
+  useParams,
+} from "react-router-dom";
+import { getAdminVans } from "../../utils/api";
+import { requireAuth } from "../../utils/authCheck";
+
+export const loader = async ({ params }) => {
+  await requireAuth();
+  return getAdminVans(params.id);
+};
 
 const AdminVanDetails = () => {
   const getTypeClasses = (type) => {
@@ -24,15 +37,17 @@ const AdminVanDetails = () => {
   const getLinkClass = ({ isActive }) =>
     isActive ? `${navLinkStyles} ${activeNavLinkStyles}` : navLinkStyles;
 
-  const { id } = useParams();
-  const [currentVan, setCurrentVan] = useState(null);
+  // const { id } = useParams();
+  // const [currentVan, setCurrentVan] = useState(null);
 
-  useEffect(() => {
-    fetch(`/api/admin/vans/${id}`)
-      .then((res) => res.json())
-      // .then((data) => console.log(data.vans));
-      .then((data) => setCurrentVan(data.vans));
-  }, [id]);
+  // useEffect(() => {
+  //   fetch(`/api/admin/vans/${id}`)
+  //     .then((res) => res.json())
+  //     // .then((data) => console.log(data.vans));
+  //     .then((data) => setCurrentVan(data.vans));
+  // }, [id]);
+
+  const currentVan = useLoaderData();
 
   return (
     <section>
